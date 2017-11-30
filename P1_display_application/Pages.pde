@@ -6,11 +6,11 @@ class Pages {
   Pages() {
   }
   void frontPage() {
-    image(imgFP, 0, 0, width, height);
+    image(imgFP, 0, heightScalePos, width, int(heightScale));
   }
 
   void pageChange(PImage img) {
-    image(img, 0, height-animY, animX, animY);
+    image(img, 0, heightScale-animY, animX, animY);
     if (animX < width) {
       if (animX > width-(animSpeedX*resScaleX)) {
         animX = width;
@@ -20,24 +20,24 @@ class Pages {
     } else {
       animX = width;
     }
-    if (animY < height) {
-      if (animY > height-(animSpeedY*resScaleY)) {
-        animY = height;
+    if (animY < heightScale) {
+      if (animY > heightScale-(animSpeedY*resScaleY)) {
+        animY = int(heightScale);
       } else {
         animY+=animSpeedY*resScaleY;
       }
     } else {
-      animY = height;
+      animY = int(heightScale);
     }
-    if (animX == width && animY == height) {
+    if (animX == width && animY == heightScale) {
       animX = width;
-      animY = height;
+      animY = int(heightScale);
       page1 = false;
     }
   }
 
   void goHome(PImage img) {
-    image(img, 0, height-animY, animX, animY);
+    image(img, 0, int(heightScale)-animY, animX, animY);
     if (animX > 0) {
       animX -= animSpeedX*resScaleX;
     } else {

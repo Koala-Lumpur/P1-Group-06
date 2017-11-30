@@ -9,17 +9,29 @@ int homeX, homeY, homeSizeX, homeSizeY;
 
 float rotX, rotY;
 
+float heightScale;
+int heightScalePos;
+
 boolean page1, pageHow, page3D, homeAnim;
 
 Pages pages = new Pages();
 
 void setup() {
   frameRate(60);
+  background(0);
   orientation(LANDSCAPE);
   size(displayWidth, displayHeight, P3D);
+  
+  heightScale = float(width)/(16.0/9.0);
+  
+  println(heightScale);
+  
+  heightScalePos = (int(height-heightScale))/2;
+  
+  println(heightScalePos);
 
   resScaleX = float(width)/1920;
-  resScaleY = float(height)/1080;
+  resScaleY = heightScale/1080;
 
   buttonSizeX = 261*width/1920;
   buttonSizeY = 209*height/1080;
@@ -75,21 +87,21 @@ void translations() {
 void mousePressed() {
   if (page1) {
     if (mouseX > 243*resScaleX && mouseX < 243*resScaleX+buttonSizeX && 
-      mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
+      mouseY > buttonY+heightScalePos && mouseY < buttonY+buttonSizeY+heightScalePos) {
       pageHow = true;
       println("touched");
     } else if (mouseX > 830*resScaleX && mouseX < 830*resScaleX+buttonSizeX && 
-      mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
+      mouseY > buttonY+heightScalePos && mouseY < buttonY+buttonSizeY+heightScalePos) {
       println("touched 2");
     } else if (mouseX > 1420*resScaleX && mouseX < 1420*resScaleX+buttonSizeX && 
-      mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
+      mouseY > buttonY+heightScalePos && mouseY < buttonY+buttonSizeY+heightScalePos) {
       println("touched 3");
     } else {
       println("nope");
     }
   } else {
     if (mouseX > homeX && mouseX < homeX+homeSizeX &&
-      mouseY > homeY && mouseY < homeY+homeSizeY) {
+      mouseY > homeY+heightScalePos && mouseY < homeY+homeSizeY+heightScalePos) {
       println("page 1");
       homeAnim = true;
       page1 = true;

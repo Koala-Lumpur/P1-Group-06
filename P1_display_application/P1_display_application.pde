@@ -9,7 +9,7 @@ int homeX, homeY, homeSizeX, homeSizeY;
 
 float rotX, rotY;
 
-boolean page1, pageHow, page3D, homeAnim;
+boolean page1, pageHow, page3D, homeAnim, pageAnim;
 
 Pages pages = new Pages();
 

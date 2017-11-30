@@ -1,5 +1,5 @@
 PShape table;
-PImage imgFP, imgHow;
+PImage imgFP, imgHow, page2;
 
 float resScaleX, resScaleY;
 
@@ -9,7 +9,7 @@ int homeX, homeY, homeSizeX, homeSizeY;
 
 float rotX, rotY;
 
-boolean page1, pageHow, page3D, homeAnim, pageAnim;
+boolean page1, pageHow, page3D, homeAnim;
 
 Pages pages = new Pages();
 
@@ -38,7 +38,6 @@ void setup() {
 }
 
 void draw() {
-  println(pageHow);
   if (page1) {
     pages.frontPage();
   }

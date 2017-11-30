@@ -50,7 +50,7 @@ class Pages {
     }
     if (animX == 0 && animY == 0) {
       pageHow = false;
-      pageAnim = false;
+      homeAnim = false;
     }
   }
 }

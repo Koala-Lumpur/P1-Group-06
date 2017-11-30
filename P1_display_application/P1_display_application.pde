@@ -38,7 +38,7 @@ void setup() {
 }
 
 void draw() {
-  println(page1);
+  println(pageHow);
   if (page1) {
     pages.frontPage();
   }

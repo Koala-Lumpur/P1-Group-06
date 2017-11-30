@@ -10,7 +10,7 @@ int homeX, homeY, homeSizeX, homeSizeY;
 float rotX, rotY;
 
 float heightScale;
-int heightScalePos;
+int heightScalePos = 0;
 
 boolean page1, pageHow, page3D, homeAnim;
 
@@ -26,7 +26,7 @@ void setup() {
   
   println(heightScale);
   
-  heightScalePos = (int(height-heightScale))/2;
+  heightScalePos = (height-int(heightScale))/2;
   
   println(heightScalePos);
 
@@ -71,7 +71,7 @@ void draw() {
   }
 }
 
-void touchMoved() {
+void mouseDragged() {
   float x1 = mouseX-pmouseX;
   float y1 = mouseY-pmouseY;
   rotX += -y1 * 0.001;

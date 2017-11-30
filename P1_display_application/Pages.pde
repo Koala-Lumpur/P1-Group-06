@@ -10,7 +10,7 @@ class Pages {
   }
 
   void pageChange(PImage img) {
-    image(img, 0, heightScale-animY, animX, animY);
+    image(img, 0, heightScale-animY+heightScalePos, animX, animY);
     if (animX < width) {
       if (animX > width-(animSpeedX*resScaleX)) {
         animX = width;
@@ -37,7 +37,7 @@ class Pages {
   }
 
   void goHome(PImage img) {
-    image(img, 0, int(heightScale)-animY, animX, animY);
+    image(img, 0, int(heightScale)-animY+heightScalePos, animX, animY);
     if (animX > 0) {
       animX -= animSpeedX*resScaleX;
     } else {

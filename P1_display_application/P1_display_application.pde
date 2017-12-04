@@ -66,17 +66,16 @@ void draw() {
 void mouseDragged() {
   float x1 = mouseX-pmouseX;
   float y1 = mouseY-pmouseY;
-  rotX += -y1 * 0.001;
-  rotY += x1 * 0.001;
+  rotX += -y1 * 0.005;
+  rotY += x1 * 0.005;
 }
 
 void translations() {
   translate(width/2, height/1.5);
-  textureMode(IMAGE);
+  textureMode(NORMAL);
   lights();
-  ambientLight(128,128,128);
+  ambientLight(255,255,255);
   directionalLight(128, 128, 128, 0, 0, -1);
-  directionalLight(128, 128, 128, -1, 0, 0);
   rotateX(rotX);
   rotateY(rotY);
 }

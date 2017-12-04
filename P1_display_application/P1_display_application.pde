@@ -22,12 +22,12 @@ void setup() {
   orientation(LANDSCAPE);
   fullScreen(P3D);
 
-  resScaleX = float(width)/1920;
-  resScaleY = float(height)/1080;
+  resScaleX = float(width)/2048;
+  resScaleY = float(height)/1536;
 
-  buttonSizeX = 261*width/1920;
-  buttonSizeY = 209*height/1080;
-  buttonY = int(825*resScaleY);
+  buttonSizeX = int(289*resScaleX);
+  buttonSizeY = int(245*resScaleY);
+  buttonY = int(1225*resScaleY);
 
   homeX = int(35*resScaleX);
   homeY = int(40*resScaleY);
@@ -36,12 +36,17 @@ void setup() {
 
   page1 = true;
 
-  imgFP = loadImage("frontPage.jpg");
+  imgFP = loadImage("FrontPage.jpg");
   imgHow = loadImage("howDoesItWork.jpg");
   temple = loadShape("Temple.obj");
 }
 
 void draw() {
+  
+  rect(407*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
+  rect(885*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
+  rect(1440*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
+  
   if (page1) {
     pages.frontPage();
   }
@@ -56,6 +61,8 @@ void draw() {
 
   if (page3D) {
     background(255);
+    disableMaterial();
+    
     lights();
     translations();
     rotateX(radians(180));
@@ -66,15 +73,14 @@ void draw() {
 void mouseDragged() {
   float x1 = mouseX-pmouseX;
   float y1 = mouseY-pmouseY;
-  rotX += -y1 * 0.005;
-  rotY += x1 * 0.005;
+  rotX += -y1 * 0.001;
+  rotY += x1 * 0.001;
 }
 
 void translations() {
   translate(width/2, height/1.5);
   scale(25);
-  lights();
-  ambientLight(255,255,255);
+  ambientLight(128,128,128);
   directionalLight(128, 128, 128, 0, 0, -1);
   rotateX(rotX);
   rotateY(rotY);
@@ -82,7 +88,7 @@ void translations() {
 
 void mousePressed() {
   if (page1) {
-    if (mouseX > 243*resScaleX && mouseX < 243*resScaleX+buttonSizeX && 
+    if (mouseX > 407*resScaleX && mouseX < 407*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       pageHow = true;
       println("touched");
@@ -105,3 +111,6 @@ void mousePressed() {
     }
   }
 }
+void disableMaterial() {}
+
+void enableTexture() {}

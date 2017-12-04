@@ -1,7 +1,7 @@
 class Pages {
   int animX, animY;
   int animSpeedX = 120;
-  int animSpeedY = 70;
+  int animSpeedY = 90;
 
   Pages() {
   }

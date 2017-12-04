@@ -1,5 +1,5 @@
-PShape table;
-PImage imgFP, imgHow, page2;
+PShape temple;
+PImage imgFP, imgHow;
 
 float resScaleX, resScaleY;
 
@@ -20,18 +20,10 @@ void setup() {
   frameRate(60);
   background(0);
   orientation(LANDSCAPE);
-  size(displayWidth, displayHeight, P3D);
-  
-  heightScale = float(width)/(16.0/9.0);
-  
-  println(heightScale);
-  
-  heightScalePos = (height-int(heightScale))/2;
-  
-  println(heightScalePos);
+  fullScreen(P3D);
 
   resScaleX = float(width)/1920;
-  resScaleY = heightScale/1080;
+  resScaleY = float(height)/1080;
 
   buttonSizeX = 261*width/1920;
   buttonSizeY = 209*height/1080;
@@ -46,7 +38,7 @@ void setup() {
 
   imgFP = loadImage("frontPage.jpg");
   imgHow = loadImage("howDoesItWork.jpg");
-  table = loadShape("Table.obj");
+  temple = loadShape("Temple.obj");
 }
 
 void draw() {
@@ -67,7 +59,7 @@ void draw() {
     lights();
     translations();
     rotateX(radians(180));
-    shape(table);
+    shape(temple);
   }
 }
 
@@ -79,7 +71,12 @@ void mouseDragged() {
 }
 
 void translations() {
-  translate(width/2, height/2);
+  translate(width/2, height/1.5);
+  textureMode(IMAGE);
+  lights();
+  ambientLight(128,128,128);
+  directionalLight(128, 128, 128, 0, 0, -1);
+  directionalLight(128, 128, 128, -1, 0, 0);
   rotateX(rotX);
   rotateY(rotY);
 }
@@ -87,21 +84,22 @@ void translations() {
 void mousePressed() {
   if (page1) {
     if (mouseX > 243*resScaleX && mouseX < 243*resScaleX+buttonSizeX && 
-      mouseY > buttonY+heightScalePos && mouseY < buttonY+buttonSizeY+heightScalePos) {
+      mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       pageHow = true;
       println("touched");
     } else if (mouseX > 830*resScaleX && mouseX < 830*resScaleX+buttonSizeX && 
-      mouseY > buttonY+heightScalePos && mouseY < buttonY+buttonSizeY+heightScalePos) {
+      mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       println("touched 2");
+      page3D = true;
     } else if (mouseX > 1420*resScaleX && mouseX < 1420*resScaleX+buttonSizeX && 
-      mouseY > buttonY+heightScalePos && mouseY < buttonY+buttonSizeY+heightScalePos) {
+      mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       println("touched 3");
     } else {
       println("nope");
     }
   } else {
     if (mouseX > homeX && mouseX < homeX+homeSizeX &&
-      mouseY > homeY+heightScalePos && mouseY < homeY+homeSizeY+heightScalePos) {
+      mouseY > homeY && mouseY < homeY+homeSizeY) {
       println("page 1");
       homeAnim = true;
       page1 = true;

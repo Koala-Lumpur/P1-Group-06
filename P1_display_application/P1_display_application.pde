@@ -72,7 +72,6 @@ void mouseDragged() {
 
 void translations() {
   translate(width/2, height/1.5);
-  textureMode(NORMAL);
   lights();
   ambientLight(255,255,255);
   directionalLight(128, 128, 128, 0, 0, -1);

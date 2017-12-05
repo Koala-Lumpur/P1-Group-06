@@ -17,7 +17,7 @@ boolean page1, pageHow, page3D, homeAnim;
 Pages pages = new Pages();
 
 void setup() {
-  frameRate(100);
+  frameRate(60);
   background(0);
   orientation(LANDSCAPE);
   fullScreen(P3D);

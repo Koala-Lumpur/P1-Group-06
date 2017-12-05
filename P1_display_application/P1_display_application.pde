@@ -83,7 +83,7 @@ void mouseDragged() {
 
 void translations() {
   translate(width/2, height/1.5);
-  scale(25);
+  scale(20);
   ambientLight(128,128,128);
   directionalLight(128, 128, 128, 0, 0, -1);
   rotateX(rotX);

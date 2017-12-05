@@ -17,7 +17,7 @@ boolean page1, pageHow, page3D, homeAnim;
 Pages pages = new Pages();
 
 void setup() {
-  frameRate(60);
+  frameRate(100);
   background(0);
   orientation(LANDSCAPE);
   fullScreen(P3D);
@@ -62,12 +62,17 @@ void draw() {
   if (page3D) {
     background(255);
     disableMaterial();
+    text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
     
     lights();
     translations();
     rotateX(radians(180));
     shape(temple);
   }
+  
+  fill(0);
+  textSize(30);
+  text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
 }
 
 void mouseDragged() {

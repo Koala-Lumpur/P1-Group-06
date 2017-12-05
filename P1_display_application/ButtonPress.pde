@@ -32,6 +32,7 @@ class ButtonPress {
     if (mouseX > homeX && mouseX < homeX+homeSizeX &&
       mouseY > homeY && mouseY < homeY+homeSizeY) {
       println("page 1");
+      modelPressed = false;
       if (!page3D) {
         homeAnim = true;
         frontPage = true;

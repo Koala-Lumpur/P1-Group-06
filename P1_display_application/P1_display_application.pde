@@ -13,6 +13,8 @@ float rotX, rotY;
 
 boolean frontPage, pageObjView, page3D, homeAnim;
 
+boolean modelPressed;
+
 Pages pages = new Pages();
 ButtonPress buttons = new ButtonPress();
 
@@ -77,6 +79,12 @@ void draw() {
     popMatrix();
     image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 105*resScaleY);
     image(showObjectButton, 1440*resScaleX, 100*resScaleY);
+    if(!modelPressed) {
+      rotY += radians(1);
+    }
+    if(mousePressed) {
+      modelPressed = true;
+    }
     //rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
   }
 

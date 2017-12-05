@@ -38,16 +38,15 @@ void setup() {
   imgFP = loadImage("FrontPage.jpg");
   img3D = loadImage("ObjectViewer1.jpg");
   homeIcon = loadImage("homeIcon.png");
-  book = loadImage("delphi_tholos.jpg");
+  book = loadImage("FakeBook.jpg");
   temple = loadShape("Temple.obj");
-
 }
 
 void draw() {
 
   //rect(407*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
   //rect(885*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
-  rect(1440*resScaleX, 200*resScaleY, 289*resScaleX,245*resScaleY);
+  //rect(1440*resScaleX, 200*resScaleY, 289*resScaleX, 245*resScaleY);
 
   if (page1) {
     background(255);
@@ -64,7 +63,7 @@ void draw() {
 
   if (page3D) {
     background(0);
-    image(book, -500,0);
+    image(book, 0, 0, width, height);
     text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
     lights();
     pushMatrix();
@@ -78,23 +77,26 @@ void draw() {
   fill(0);
   textSize(30);
   text(int(frameRate), 2000*resScaleX, 50*resScaleY);
-  
+
   //rect(homeX, homeY, homeSizeX,homeSizeY);
+  rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
 }
 
 void mouseDragged() {
+  if(temple.isVisible()) {
   float x1 = mouseX-pmouseX;
   float y1 = mouseY-pmouseY;
   rotX += -y1 * 0.002;
   rotY += x1 * 0.002;
+  }
 }
 
 void translations() {
-  translate(width/2, height/1.5);
-  scale(20);
+  translate(1300*resScaleX, 900, 300);
+  scale(10);
   ambientLight(128, 128, 128);
   directionalLight(128, 128, 128, 0, 0, -1);
-  rotateX(rotX);
+  //rotateX(rotX);
   rotateY(rotY);
 }
 
@@ -127,5 +129,20 @@ void mousePressed() {
         page1 = true;
       }
     }
+  }
+
+  if (page3D) {
+    if (mouseX > 1440*resScaleX && mouseX < 1440*resScaleX+500 && 
+      mouseY > 100 && mouseY < 100+245) {
+      showModel();
+    }
+  }
+}
+
+void showModel() {
+  if (temple.isVisible()) {
+    temple.setVisible(false);
+  } else {
+    temple.setVisible(true);
   }
 }

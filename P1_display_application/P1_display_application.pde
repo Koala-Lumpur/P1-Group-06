@@ -1,5 +1,5 @@
 PShape temple;
-PImage imgFP, imgHow;
+PImage imgFP, img3D;
 
 float resScaleX, resScaleY;
 
@@ -29,41 +29,40 @@ void setup() {
   buttonSizeY = int(245*resScaleY);
   buttonY = int(1225*resScaleY);
 
-  homeX = int(35*resScaleX);
-  homeY = int(40*resScaleY);
+  homeX = int(30*resScaleX);
+  homeY = int(20*resScaleY);
   homeSizeX = int(120*resScaleX);
-  homeSizeY = int(100*resScaleY);
+  homeSizeY = int(130*resScaleY);
 
   page1 = true;
 
   imgFP = loadImage("FrontPage.jpg");
-  imgHow = loadImage("howDoesItWork.jpg");
+  img3D = loadImage("ObjectViewer1.jpg");
   temple = loadShape("Temple.obj");
 }
 
 void draw() {
   
-  rect(407*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
-  rect(885*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
-  rect(1440*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
+  //rect(407*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
+  //rect(885*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
+  //rect(1440*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
+  //rect(homeX, homeY, homeSizeX,homeSizeY);
   
   if (page1) {
     pages.frontPage();
   }
 
   if (pageHow && homeAnim) {
-    pages.goHome(imgHow);
+    pages.goHome(img3D);
   }
 
   if (pageHow && !homeAnim) {
-    pages.pageChange(imgHow);
+    pages.pageChange(img3D);
   }
 
   if (page3D) {
     background(255);
-    disableMaterial();
     text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
-    
     lights();
     translations();
     rotateX(radians(180));
@@ -78,8 +77,8 @@ void draw() {
 void mouseDragged() {
   float x1 = mouseX-pmouseX;
   float y1 = mouseY-pmouseY;
-  rotX += -y1 * 0.001;
-  rotY += x1 * 0.001;
+  rotX += -y1 * 0.002;
+  rotY += x1 * 0.002;
 }
 
 void translations() {
@@ -97,11 +96,11 @@ void mousePressed() {
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       pageHow = true;
       println("touched");
-    } else if (mouseX > 830*resScaleX && mouseX < 830*resScaleX+buttonSizeX && 
+    } else if (mouseX > 885*resScaleX && mouseX < 885*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       println("touched 2");
       page3D = true;
-    } else if (mouseX > 1420*resScaleX && mouseX < 1420*resScaleX+buttonSizeX && 
+    } else if (mouseX > 1440*resScaleX && mouseX < 1440*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       println("touched 3");
     } else {
@@ -116,6 +115,3 @@ void mousePressed() {
     }
   }
 }
-void disableMaterial() {}
-
-void enableTexture() {}

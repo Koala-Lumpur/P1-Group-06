@@ -36,7 +36,7 @@ void setup() {
 
   page1 = true;
 
-  imgFP = loadImage("frontPage.jpg");
+  imgFP = loadImage("FrontPage.jpg");
   imgHow = loadImage("howDoesItWork.jpg");
   temple = loadShape("Temple.obj");
 }

@@ -11,3 +11,9 @@ was hit, because the x and y value for the image could for one frame be more tha
 and height of the screen, this was resolved by adding a way to check if for the next frame
 the x and y value of the image would be more than the width and height of the window.
 Equation looks like this: animX > width-(animSpeedX*resScaleX)
+
+3D model in Processing Android
+So..it looks like the 3D model just won't work on a tablet properly. We get around 5-6 fps when we load in the model with textures or even with just materials. We feel terrible. All this work...and to what end?! For nothing! I despise myself.
+Right now we will still try a few methods to fix this, but according to our research, Processing Android just can't handle 3D models.
+We might just have to run the whole project on computers after all....'
+I cant believe this. We resolved the3 problem. It was the motherfucking UV mappings in Maya. We are so happy right now. 

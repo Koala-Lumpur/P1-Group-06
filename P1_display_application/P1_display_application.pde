@@ -76,7 +76,6 @@ void draw() {
     shape(temple);
     popMatrix();
     image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 105*resScaleY);
-    fill(255);
     image(showObjectButton, 1440*resScaleX, 100*resScaleY);
     //rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
   }

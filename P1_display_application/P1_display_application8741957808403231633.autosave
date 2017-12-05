@@ -14,20 +14,27 @@ int heightScalePos = 0;
 
 boolean page1, pageHow, page3D, homeAnim;
 
+PVector half = new PVector();
+PVector mouse = new PVector();
+
+float angle;
+float concentration;
+float viewOff;
+
 Pages pages = new Pages();
 
 void setup() {
-  frameRate(100);
+  frameRate(60);
   background(0);
   orientation(LANDSCAPE);
   fullScreen(P3D);
 
-  resScaleX = float(width)/2048;
-  resScaleY = float(height)/1536;
+  resScaleX = float(width)/1920;
+  resScaleY = float(height)/1080;
 
-  buttonSizeX = int(289*resScaleX);
-  buttonSizeY = int(245*resScaleY);
-  buttonY = int(1225*resScaleY);
+  buttonSizeX = 261*width/1920;
+  buttonSizeY = 209*height/1080;
+  buttonY = int(825*resScaleY);
 
   homeX = int(35*resScaleX);
   homeY = int(40*resScaleY);
@@ -42,11 +49,6 @@ void setup() {
 }
 
 void draw() {
-  
-  rect(407*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
-  rect(885*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
-  rect(1440*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
-  
   if (page1) {
     pages.frontPage();
   }
@@ -61,18 +63,25 @@ void draw() {
 
   if (page3D) {
     background(255);
-    disableMaterial();
-    text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
-    
-    lights();
+   spotLight(0, 127, 255,
+    -half.x, sin(frameCount * .02) * half.y, 0,
+    1, 0, 0,
+    PI, 25);
+
+  // Vertical light.
+  spotLight(0, 255, 127,
+    cos(frameCount * .02) * half.x, -half.y, 0,
+    0, 1, 0,
+    PI, 25);
     translations();
     rotateX(radians(180));
     shape(temple);
+    
+    spotLight(191, 170, 133,
+    0, 0, viewOff,
+    mouse.x, mouse.y, -1,
+    angle, concentration);
   }
-  
-  fill(0);
-  textSize(30);
-  text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
 }
 
 void mouseDragged() {
@@ -84,16 +93,18 @@ void mouseDragged() {
 
 void translations() {
   translate(width/2, height/1.5);
-  scale(25);
+  textureMode(IMAGE);
+  lights();
   ambientLight(128,128,128);
   directionalLight(128, 128, 128, 0, 0, -1);
+  directionalLight(128, 128, 128, -1, 0, 0);
   rotateX(rotX);
   rotateY(rotY);
 }
 
 void mousePressed() {
   if (page1) {
-    if (mouseX > 407*resScaleX && mouseX < 407*resScaleX+buttonSizeX && 
+    if (mouseX > 243*resScaleX && mouseX < 243*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       pageHow = true;
       println("touched");
@@ -116,6 +127,3 @@ void mousePressed() {
     }
   }
 }
-void disableMaterial() {}
-
-void enableTexture() {}

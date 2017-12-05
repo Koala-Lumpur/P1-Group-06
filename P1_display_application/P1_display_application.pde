@@ -41,8 +41,7 @@ void setup() {
   img3D = loadImage("ObjectViewer1.jpg");
   homeIcon = loadImage("homeIcon.png");
   temple = loadShape("Temple.obj");
-  
-  temple.setVisible(false);
+
 }
 
 void draw() {
@@ -52,6 +51,7 @@ void draw() {
   //rect(1440*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
 
   if (page1) {
+    background(255);
     pages.frontPage();
   }
 
@@ -68,21 +68,18 @@ void draw() {
     text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
     lights();
     pushMatrix();
-    temple.setVisible(true);
     translations();
     rotateX(radians(180));
     shape(temple);
     popMatrix();
     image(homeIcon, homeX, homeY);
-  } else {
-    temple.setVisible(false);
   }
 
   fill(0);
   textSize(30);
   text(int(frameRate), 2000*resScaleX, 50*resScaleY);
   
-  rect(homeX, homeY, homeSizeX,homeSizeY);
+  //rect(homeX, homeY, homeSizeX,homeSizeY);
 }
 
 void mouseDragged() {

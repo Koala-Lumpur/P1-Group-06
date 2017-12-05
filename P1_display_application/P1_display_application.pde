@@ -1,6 +1,6 @@
 PShape temple;
-PImage imgFP, imgObjView;
-PImage homeIcon;
+PImage imgFP, imgObjView, beforeQuiz;
+PImage homeIcon, showObjectButton;
 PImage book;
 
 float resScaleX, resScaleY;
@@ -39,6 +39,7 @@ void setup() {
   imgFP = loadImage("FrontPage.jpg");
   imgObjView = loadImage("ObjectViewer3.jpg");
   homeIcon = loadImage("HouseIcon.png");
+  showObjectButton = loadImage("VisObjekt.jpg");
   book = loadImage("FakeBook.jpg");
   temple = loadShape("Temple.obj");
 }
@@ -61,7 +62,7 @@ void draw() {
   if (pageObjView && !homeAnim) {
     pages.pageChange(imgObjView);
     noFill();
-    rect(629*resScaleX, 640*resScaleY, 750*resScaleX, 252*resScaleY);
+    //rect(629*resScaleX, 640*resScaleY, 750*resScaleX, 252*resScaleY);
   }
 
   if (page3D) {
@@ -76,7 +77,8 @@ void draw() {
     popMatrix();
     image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 105*resScaleY);
     fill(255);
-    rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
+    image(showObjectButton, 1440*resScaleX, 100*resScaleY);
+    //rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
   }
 
   fill(0);

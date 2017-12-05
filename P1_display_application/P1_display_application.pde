@@ -1,5 +1,5 @@
 PShape temple;
-PImage imgFP, img3D;
+PImage imgFP, imgObjView;
 PImage homeIcon;
 PImage book;
 
@@ -11,7 +11,7 @@ int homeX, homeY, homeSizeX, homeSizeY;
 
 float rotX, rotY;
 
-boolean page1, pageHow, page3D, homeAnim;
+boolean frontPage, pageObjView, page3D, homeAnim;
 
 Pages pages = new Pages();
 
@@ -33,11 +33,11 @@ void setup() {
   homeSizeX = int(120*resScaleX);
   homeSizeY = int(130*resScaleY);
 
-  page1 = true;
+  frontPage = true;
 
   imgFP = loadImage("FrontPage.jpg");
-  img3D = loadImage("ObjectViewer1.jpg");
-  homeIcon = loadImage("homeIcon.png");
+  imgObjView = loadImage("ObjectViewer1.jpg");
+  homeIcon = loadImage("HouseIcon.png");
   book = loadImage("FakeBook.jpg");
   temple = loadShape("Temple.obj");
 }
@@ -48,17 +48,17 @@ void draw() {
   //rect(885*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
   //rect(1440*resScaleX, 200*resScaleY, 289*resScaleX, 245*resScaleY);
 
-  if (page1) {
+  if (frontPage) {
     background(255);
     pages.frontPage();
   }
 
-  if (pageHow && homeAnim) {
-    pages.goHome(img3D);
+  if (pageObjView && homeAnim) {
+    pages.goHome(imgObjView);
   }
 
-  if (pageHow && !homeAnim) {
-    pages.pageChange(img3D);
+  if (pageObjView && !homeAnim) {
+    pages.pageChange(imgObjView);
   }
 
   if (page3D) {
@@ -72,6 +72,8 @@ void draw() {
     shape(temple);
     popMatrix();
     image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 81*resScaleY);
+    fill(255);
+    rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
   }
 
   fill(0);
@@ -79,7 +81,6 @@ void draw() {
   text(int(frameRate), 2000*resScaleX, 50*resScaleY);
 
   //rect(homeX, homeY, homeSizeX,homeSizeY);
-  rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
 }
 
 void mouseDragged() {
@@ -101,15 +102,15 @@ void translations() {
 }
 
 void mousePressed() {
-  if (page1) {
+  if (frontPage) {
     if (mouseX > 407*resScaleX && mouseX < 407*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
-      pageHow = true;
+      pageObjView = true;
       println("touched");
     } else if (mouseX > 885*resScaleX && mouseX < 885*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       println("touched 2");
-      page1 = false;
+      frontPage = false;
       page3D = true;
     } else if (mouseX > 1440*resScaleX && mouseX < 1440*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
@@ -123,17 +124,17 @@ void mousePressed() {
       println("page 1");
       if (!page3D) {
         homeAnim = true;
-        page1 = true;
+        frontPage = true;
       } else {
         page3D = false;
-        page1 = true;
+        frontPage = true;
       }
     }
   }
 
   if (page3D) {
     if (mouseX > 1440*resScaleX && mouseX < 1440*resScaleX+500 && 
-      mouseY > 100 && mouseY < 100+245) {
+      mouseY > 100*resScaleY && mouseY < 100+245*resScaleY) {
       showModel();
     }
   }

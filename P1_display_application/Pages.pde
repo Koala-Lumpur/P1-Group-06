@@ -32,7 +32,7 @@ class Pages {
     if (animX == width && animY == height) {
       animX = width;
       animY = height;
-      page1 = false;
+      frontPage = false;
     }
   }
 
@@ -49,7 +49,7 @@ class Pages {
       animY = 0;
     }
     if (animX == 0 && animY == 0) {
-      pageHow = false;
+      pageObjView = false;
       homeAnim = false;
     }
   }

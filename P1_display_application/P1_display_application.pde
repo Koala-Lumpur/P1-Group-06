@@ -14,6 +14,7 @@ float rotX, rotY;
 boolean frontPage, pageObjView, page3D, homeAnim;
 
 Pages pages = new Pages();
+ButtonPress buttons = new ButtonPress();
 
 void setup() {
   frameRate(60);
@@ -36,7 +37,7 @@ void setup() {
   frontPage = true;
 
   imgFP = loadImage("FrontPage.jpg");
-  imgObjView = loadImage("ObjectViewer1.jpg");
+  imgObjView = loadImage("ObjectViewer3.jpg");
   homeIcon = loadImage("HouseIcon.png");
   book = loadImage("FakeBook.jpg");
   temple = loadShape("Temple.obj");
@@ -59,6 +60,8 @@ void draw() {
 
   if (pageObjView && !homeAnim) {
     pages.pageChange(imgObjView);
+    noFill();
+    rect(629*resScaleX, 640*resScaleY, 750*resScaleX, 252*resScaleY);
   }
 
   if (page3D) {
@@ -71,7 +74,7 @@ void draw() {
     rotateX(radians(180));
     shape(temple);
     popMatrix();
-    image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 81*resScaleY);
+    image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 105*resScaleY);
     fill(255);
     rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
   }
@@ -84,11 +87,11 @@ void draw() {
 }
 
 void mouseDragged() {
-  if(temple.isVisible()) {
-  float x1 = mouseX-pmouseX;
-  float y1 = mouseY-pmouseY;
-  rotX += -y1 * 0.002;
-  rotY += x1 * 0.002;
+  if (temple.isVisible()) {
+    float x1 = mouseX-pmouseX;
+    float y1 = mouseY-pmouseY;
+    rotX += -y1 * 0.002;
+    rotY += x1 * 0.002;
   }
 }
 
@@ -103,33 +106,13 @@ void translations() {
 
 void mousePressed() {
   if (frontPage) {
-    if (mouseX > 407*resScaleX && mouseX < 407*resScaleX+buttonSizeX && 
-      mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
-      pageObjView = true;
-      println("touched");
-    } else if (mouseX > 885*resScaleX && mouseX < 885*resScaleX+buttonSizeX && 
-      mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
-      println("touched 2");
-      frontPage = false;
-      page3D = true;
-    } else if (mouseX > 1440*resScaleX && mouseX < 1440*resScaleX+buttonSizeX && 
-      mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
-      println("touched 3");
-    } else {
-      println("nope");
-    }
+    buttons.frontPage();
   } else {
-    if (mouseX > homeX && mouseX < homeX+homeSizeX &&
-      mouseY > homeY && mouseY < homeY+homeSizeY) {
-      println("page 1");
-      if (!page3D) {
-        homeAnim = true;
-        frontPage = true;
-      } else {
-        page3D = false;
-        frontPage = true;
-      }
-    }
+    buttons.homeButton();
+  }
+  
+  if(pageObjView) {
+    buttons.page3D();
   }
 
   if (page3D) {

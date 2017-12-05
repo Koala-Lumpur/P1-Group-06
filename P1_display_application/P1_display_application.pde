@@ -1,5 +1,6 @@
 PShape temple;
 PImage imgFP, img3D;
+PImage homeIcon;
 
 float resScaleX, resScaleY;
 
@@ -38,16 +39,18 @@ void setup() {
 
   imgFP = loadImage("FrontPage.jpg");
   img3D = loadImage("ObjectViewer1.jpg");
+  homeIcon = loadImage("homeIcon.png");
   temple = loadShape("Temple.obj");
+  
+  temple.setVisible(false);
 }
 
 void draw() {
-  
+
   //rect(407*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
   //rect(885*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
   //rect(1440*resScaleX, 1225*resScaleY, 289*resScaleX,245*resScaleY);
-  //rect(homeX, homeY, homeSizeX,homeSizeY);
-  
+
   if (page1) {
     pages.frontPage();
   }
@@ -64,14 +67,22 @@ void draw() {
     background(255);
     text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
     lights();
+    pushMatrix();
+    temple.setVisible(true);
     translations();
     rotateX(radians(180));
     shape(temple);
+    popMatrix();
+    image(homeIcon, homeX, homeY);
+  } else {
+    temple.setVisible(false);
   }
-  
+
   fill(0);
   textSize(30);
-  text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
+  text(int(frameRate), 2000*resScaleX, 50*resScaleY);
+  
+  rect(homeX, homeY, homeSizeX,homeSizeY);
 }
 
 void mouseDragged() {
@@ -84,7 +95,7 @@ void mouseDragged() {
 void translations() {
   translate(width/2, height/1.5);
   scale(20);
-  ambientLight(128,128,128);
+  ambientLight(128, 128, 128);
   directionalLight(128, 128, 128, 0, 0, -1);
   rotateX(rotX);
   rotateY(rotY);
@@ -99,6 +110,7 @@ void mousePressed() {
     } else if (mouseX > 885*resScaleX && mouseX < 885*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       println("touched 2");
+      page1 = false;
       page3D = true;
     } else if (mouseX > 1440*resScaleX && mouseX < 1440*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
@@ -110,8 +122,13 @@ void mousePressed() {
     if (mouseX > homeX && mouseX < homeX+homeSizeX &&
       mouseY > homeY && mouseY < homeY+homeSizeY) {
       println("page 1");
-      homeAnim = true;
-      page1 = true;
+      if (!page3D) {
+        homeAnim = true;
+        page1 = true;
+      } else {
+        page3D = false;
+        page1 = true;
+      }
     }
   }
 }

@@ -112,9 +112,7 @@ void draw() {
     
   }
 
-
-
-  fill(0);
+  fill(255);
   textSize(30);
   text(int(frameRate), 2000*resScaleX, 50*resScaleY);
 

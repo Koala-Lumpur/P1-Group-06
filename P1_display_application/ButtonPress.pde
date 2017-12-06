@@ -12,7 +12,7 @@ class ButtonPress {
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       println("touched 2");
       frontPage = false;
-      
+      beforeQuizPage = true;
     } else if (mouseX > 1440*resScaleX && mouseX < 1440*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       println("touched 3");
@@ -25,6 +25,7 @@ class ButtonPress {
     if(mouseX > 629*resScaleX && mouseX < 1379*resScaleX &&
     mouseY > 640*resScaleY && mouseY < 892*resScaleY) {
       page3D = true;
+      temple.setVisible(true);
     }
   }
 
@@ -37,6 +38,7 @@ class ButtonPress {
         homeAnim = true;
         frontPage = true;
       } else {
+        background(bgColor);
         rotY = 0;
         page3D = false;
         modelNotPressed = true;

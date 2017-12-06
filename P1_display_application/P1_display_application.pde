@@ -3,6 +3,8 @@ PImage imgFP, imgObjView, beforeQuiz;
 PImage homeIcon, showObjectButton;
 PImage book;
 
+color bgColor = color(107,146,155);
+
 float resScaleX, resScaleY;
 
 int buttonSizeX, buttonSizeY;
@@ -11,7 +13,7 @@ int homeX, homeY, homeSizeX, homeSizeY;
 
 float rotX, rotY;
 
-boolean frontPage, pageObjView, page3D, homeAnim;
+boolean frontPage, pageObjView, page3D, beforeQuizPage, homeAnim;
 
 boolean modelPressed, modelNotPressed = true;
 
@@ -40,6 +42,7 @@ void setup() {
 
   imgFP = loadImage("FrontPage.jpg");
   imgObjView = loadImage("ObjectViewer3.jpg");
+  beforeQuiz = loadImage("BeforeQuizPage.jpg");
   homeIcon = loadImage("HouseIcon.png");
   showObjectButton = loadImage("VisObjekt.jpg");
   book = loadImage("FakeBook.jpg");
@@ -53,7 +56,6 @@ void draw() {
   //rect(1440*resScaleX, 200*resScaleY, 289*resScaleX, 245*resScaleY);
 
   if (frontPage) {
-    background(255);
     pages.frontPage();
   }
 
@@ -63,8 +65,15 @@ void draw() {
 
   if (pageObjView && !homeAnim) {
     pages.pageChange(imgObjView);
-    noFill();
     //rect(629*resScaleX, 640*resScaleY, 750*resScaleX, 252*resScaleY);
+  }
+  
+  if(beforeQuizPage && homeAnim) {
+    pages.goHome(beforeQuiz);
+  }
+  
+  if(beforeQuizPage && !homeAnim) {
+    pages.pageChange(beforeQuiz);
   }
 
   if (page3D) {

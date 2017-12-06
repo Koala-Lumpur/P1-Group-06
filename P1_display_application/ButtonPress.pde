@@ -25,10 +25,22 @@ class ButtonPress {
     if(mouseX > 629*resScaleX && mouseX < 1379*resScaleX &&
     mouseY > 640*resScaleY && mouseY < 892*resScaleY) {
       page3D = true;
-      temple.setVisible(true);
+      pageObjView = false;
+      pages.animX = 0;
+      pages.animY = 0;
     }
   }
-
+  
+  void quizContinue() {
+    if(mouseX > 195*resScaleX && mouseX < 627*resScaleX &&
+    mouseY > 570*resScaleY && mouseY < 850*resScaleY) {
+      pages.animX = 0;
+      pages.animY = 0;
+      beforeQuizPage = false;
+      quizPage = true;
+    }
+  }
+  
   void homeButton() {
     if (mouseX > homeX && mouseX < homeX+homeSizeX &&
       mouseY > homeY && mouseY < homeY+homeSizeY) {

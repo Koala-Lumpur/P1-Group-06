@@ -11,25 +11,32 @@ class Pages {
 
   void pageChange(PImage img) {
     image(img, 0, height-animY, animX, animY);
-    if (animX < width) {
-      if (animX > width-(animSpeedX*resScaleX)) {
-        animX = width;
-      } else {
-        animX+=animSpeedX*resScaleX;
-      }
-    } else {
+    animX += animSpeedX*resScaleX;
+    animY += animSpeedY*resScaleY;
+    if (animX > width-(animSpeedX*resScaleX)) {
       animX = width;
     }
-    if (animY < height) {
-      if (animY > height-(animSpeedY*resScaleY)) {
-        animY = height;
-      } else {
-        animY+=animSpeedY*resScaleY;
-      }
-    } else {
+    if (animY > height-(animSpeedY*resScaleY)) {
       animY = height;
+    } 
+    if (animX == width || animY == height) {
+      animX = width;
+      animY = height;
+      frontPage = false;
     }
-    if (animX == width && animY == height) {
+  }
+
+  void animMiddle(PImage img) {
+    image(img, width/2-animX/2, height/2-animY/2, animX, animY);
+    animX += animSpeedX*resScaleX;
+    animY += animSpeedY*resScaleY;
+    if (animX > width-(animSpeedX*resScaleX)) {
+      animX = width;
+    }
+    if (animY > height-(animSpeedY*resScaleY)) {
+      animY = height;
+    } 
+    if (animX == width || animY == height) {
       animX = width;
       animY = height;
       frontPage = false;
@@ -51,6 +58,24 @@ class Pages {
     if (animX == 0 && animY == 0) {
       beforeQuizPage = false;
       pageObjView = false;
+      homeAnim = false;
+    }
+  }
+  
+  void goHomeMiddle(PImage img) {
+    image(img, width/2-animX/2, height/2-animY/2, animX, animY);
+    if (animX > 0) {
+      animX -= animSpeedX*resScaleX;
+    } else {
+      animX = 0;
+    }
+    if (animY > 0) {
+      animY -=animSpeedY*resScaleY;
+    } else {
+      animY = 0;
+    }
+    if (animX == 0 && animY == 0) {
+      quizPage = false;
       homeAnim = false;
     }
   }

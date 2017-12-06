@@ -1,5 +1,6 @@
 PShape temple;
-PImage imgFP, imgObjView, beforeQuiz;
+PImage imgFP, imgObjView; 
+PImage imgBeforeQuiz, imgQuiz;
 PImage homeIcon, showObjectButton;
 PImage book;
 
@@ -13,7 +14,10 @@ int homeX, homeY, homeSizeX, homeSizeY;
 
 float rotX, rotY;
 
-boolean frontPage, pageObjView, page3D, beforeQuizPage, homeAnim;
+boolean frontPage;
+boolean pageObjView, page3D;
+boolean beforeQuizPage, quizPage;
+boolean homeAnim;
 
 boolean modelPressed, modelNotPressed = true;
 
@@ -42,7 +46,8 @@ void setup() {
 
   imgFP = loadImage("FrontPage.jpg");
   imgObjView = loadImage("ObjectViewer3.jpg");
-  beforeQuiz = loadImage("BeforeQuizPage.jpg");
+  imgBeforeQuiz = loadImage("BeforeQuizPage.jpg");
+  imgQuiz = loadImage("QuizPage.jpg");
   homeIcon = loadImage("HouseIcon.png");
   showObjectButton = loadImage("VisObjekt.jpg");
   book = loadImage("FakeBook.jpg");
@@ -69,11 +74,21 @@ void draw() {
   }
   
   if(beforeQuizPage && homeAnim) {
-    pages.goHome(beforeQuiz);
+    pages.goHome(imgBeforeQuiz);
   }
   
   if(beforeQuizPage && !homeAnim) {
-    pages.pageChange(beforeQuiz);
+    pages.pageChange(imgBeforeQuiz);
+    noFill();
+    rect(195*resScaleX, 570*resScaleY, 432*resScaleX,280*resScaleY);
+  }
+  
+  if(quizPage && homeAnim) {
+    pages.goHomeMiddle(imgQuiz);
+  }
+  
+  if(quizPage && !homeAnim) {
+    pages.animMiddle(imgQuiz);
   }
 
   if (page3D) {
@@ -142,6 +157,10 @@ void mousePressed() {
       mouseY > 100*resScaleY && mouseY < 100+245*resScaleY) {
       showModel();
     }
+  }
+  
+  if(beforeQuizPage) {
+    buttons.quizContinue();
   }
 }
 

@@ -1,10 +1,11 @@
 PShape temple;
 PImage imgFP, imgObjView; 
 PImage imgBeforeQuiz, imgQuiz;
+PImage imgBeforeClassroom, imgClassroom;
 PImage homeIcon, showObjectButton;
 PImage book;
 
-color bgColor = color(107,146,155);
+color bgColor = color(107, 146, 155);
 
 float resScaleX, resScaleY;
 
@@ -17,6 +18,7 @@ float rotX, rotY;
 boolean frontPage;
 boolean pageObjView, page3D;
 boolean beforeQuizPage, quizPage;
+boolean beforeClassPage, classPage;
 boolean homeAnim;
 
 boolean modelPressed, modelNotPressed = true;
@@ -48,6 +50,8 @@ void setup() {
   imgObjView = loadImage("ObjectViewer3.jpg");
   imgBeforeQuiz = loadImage("BeforeQuizPage.jpg");
   imgQuiz = loadImage("QuizPage.jpg");
+  imgBeforeClassroom = loadImage("BeforeClassroomPage3.jpg");
+  imgClassroom = loadImage("Classroom.jpg");
   homeIcon = loadImage("HouseIcon.png");
   showObjectButton = loadImage("VisObjekt.jpg");
   book = loadImage("FakeBook.jpg");
@@ -73,41 +77,42 @@ void draw() {
     //rect(629*resScaleX, 640*resScaleY, 750*resScaleX, 252*resScaleY);
   }
   
-  if(beforeQuizPage && homeAnim) {
-    pages.goHome(imgBeforeQuiz);
-  }
-  
-  if(beforeQuizPage && !homeAnim) {
-    pages.pageChange(imgBeforeQuiz);
-    noFill();
-    rect(195*resScaleX, 570*resScaleY, 432*resScaleX,280*resScaleY);
-  }
-  
-  if(quizPage && homeAnim) {
-    pages.goHomeMiddle(imgQuiz);
-  }
-  
-  if(quizPage && !homeAnim) {
-    pages.animMiddle(imgQuiz);
-  }
-
   if (page3D) {
-    background(0);
-    image(book, 0, 0, width, height);
-    text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
-    lights();
-    pushMatrix();
-    translations();
-    rotateX(radians(180));
-    shape(temple);
-    popMatrix();
-    image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 105*resScaleY);
-    image(showObjectButton, 1440*resScaleX, 100*resScaleY,500*resScaleX, 245*resScaleY);
-    if(!modelPressed) {
-      rotY += radians(1);
-    }
+    page3DModel();
     //rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
   }
+
+  if (beforeQuizPage && homeAnim) {
+    pages.goHome(imgBeforeQuiz);
+  }
+
+  if (beforeQuizPage && !homeAnim) {
+    pages.pageChange(imgBeforeQuiz);
+    noFill();
+    rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
+  }
+
+  if (quizPage && homeAnim) {
+    pages.goHomeMiddle(imgQuiz);
+  }
+
+  if (quizPage && !homeAnim) {
+    pages.animMiddle(imgQuiz);
+  }
+  
+  if(beforeClassPage && !homeAnim) {
+    pages.pageChange(imgBeforeClassroom);
+  }
+  
+  if(beforeClassPage && homeAnim) {
+    pages.goHome(imgBeforeClassroom);
+  }
+  
+  if(classPage)  {
+    
+  }
+
+
 
   fill(0);
   textSize(30);
@@ -125,31 +130,22 @@ void mouseDragged() {
   }
 }
 
-void translations() {
-  translate(1300*resScaleX, 900*resScaleY, 300);
-  scale(10);
-  ambientLight(128, 128, 128);
-  directionalLight(128, 128, 128, 0, 0, -1);
-  //rotateX(rotX);
-  rotateY(rotY);
-}
-
 void mousePressed() {
   if (frontPage) {
     buttons.frontPage();
   } else {
     buttons.homeButton();
   }
-  
-  if(pageObjView) {
+
+  if (pageObjView) {
     buttons.page3D();
   }
 
   if (page3D) {
-    if(!modelNotPressed) {
+    if (!modelNotPressed) {
       modelPressed = true;
     }
-    if(modelNotPressed) {
+    if (modelNotPressed) {
       modelPressed = false;
       modelNotPressed = false;
     }
@@ -158,10 +154,36 @@ void mousePressed() {
       showModel();
     }
   }
-  
-  if(beforeQuizPage) {
+
+  if (beforeQuizPage) {
     buttons.quizContinue();
   }
+}
+
+void page3DModel() {
+  background(0);
+  image(book, 0, 0, width, height);
+  text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
+  lights();
+  pushMatrix();
+  translations();
+  rotateX(radians(180));
+  shape(temple);
+  popMatrix();
+  image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 105*resScaleY);
+  image(showObjectButton, 1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
+  if (!modelPressed) {
+    rotY += radians(1);
+  }
+}
+
+void translations() {
+  translate(1300*resScaleX, 900*resScaleY, 300);
+  scale(10);
+  ambientLight(128, 128, 128);
+  directionalLight(128, 128, 128, 0, 0, -1);
+  //rotateX(rotX);
+  rotateY(rotY);
 }
 
 void showModel() {

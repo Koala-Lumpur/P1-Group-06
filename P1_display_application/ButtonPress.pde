@@ -11,11 +11,11 @@ class ButtonPress {
     } else if (mouseX > 885*resScaleX && mouseX < 885*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       println("touched 2");
-      frontPage = false;
       beforeQuizPage = true;
     } else if (mouseX > 1440*resScaleX && mouseX < 1440*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       println("touched 3");
+      beforeClassPage = true;
     } else {
       println("nope");
     }
@@ -34,23 +34,27 @@ class ButtonPress {
   void quizContinue() {
     if(mouseX > 195*resScaleX && mouseX < 627*resScaleX &&
     mouseY > 570*resScaleY && mouseY < 850*resScaleY) {
+      quizPage = true;
+      beforeQuizPage = false;
       pages.animX = 0;
       pages.animY = 0;
-      beforeQuizPage = false;
-      quizPage = true;
     }
   }
   
   void homeButton() {
     if (mouseX > homeX && mouseX < homeX+homeSizeX &&
       mouseY > homeY && mouseY < homeY+homeSizeY) {
-      println("page 1");
       modelPressed = false;
-      if (!page3D) {
+      if (quizPage) {
+        homeAnim = true;
+        beforeQuizPage = true;
+      } else if(!page3D) {
+        println("test2");
         homeAnim = true;
         frontPage = true;
       } else {
         background(bgColor);
+        temple.setVisible(true);
         rotY = 0;
         page3D = false;
         modelNotPressed = true;

@@ -49,6 +49,7 @@ class Pages {
       animY = 0;
     }
     if (animX == 0 && animY == 0) {
+      beforeQuizPage = false;
       pageObjView = false;
       homeAnim = false;
     }

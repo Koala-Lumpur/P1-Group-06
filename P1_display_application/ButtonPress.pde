@@ -37,7 +37,9 @@ class ButtonPress {
         homeAnim = true;
         frontPage = true;
       } else {
+        rotY = 0;
         page3D = false;
+        modelNotPressed = true;
         frontPage = true;
       }
     }

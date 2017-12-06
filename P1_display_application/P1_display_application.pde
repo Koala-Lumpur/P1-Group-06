@@ -13,7 +13,7 @@ float rotX, rotY;
 
 boolean frontPage, pageObjView, page3D, homeAnim;
 
-boolean modelPressed;
+boolean modelPressed, modelNotPressed = true;
 
 Pages pages = new Pages();
 ButtonPress buttons = new ButtonPress();
@@ -78,12 +78,9 @@ void draw() {
     shape(temple);
     popMatrix();
     image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 105*resScaleY);
-    image(showObjectButton, 1440*resScaleX, 100*resScaleY);
+    image(showObjectButton, 1440*resScaleX, 100*resScaleY,500*resScaleX, 245*resScaleY);
     if(!modelPressed) {
       rotY += radians(1);
-    }
-    if(mousePressed) {
-      modelPressed = true;
     }
     //rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
   }
@@ -106,7 +103,7 @@ void mouseDragged() {
 
 void translations() {
   translate(1300*resScaleX, 900*resScaleY, 300);
-  scale(10);
+  scale(10*(resScaleY/resScaleX));
   ambientLight(128, 128, 128);
   directionalLight(128, 128, 128, 0, 0, -1);
   //rotateX(rotX);
@@ -125,6 +122,13 @@ void mousePressed() {
   }
 
   if (page3D) {
+    if(!modelNotPressed) {
+      modelPressed = true;
+    }
+    if(modelNotPressed) {
+      modelPressed = false;
+      modelNotPressed = false;
+    }
     if (mouseX > 1440*resScaleX && mouseX < 1440*resScaleX+500 && 
       mouseY > 100*resScaleY && mouseY < 100+245*resScaleY) {
       showModel();

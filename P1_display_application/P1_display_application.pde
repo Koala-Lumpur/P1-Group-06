@@ -94,6 +94,7 @@ void draw() {
   if (beforeQuizPage && !homeAnim) {
     println("beforeQuiz");
     if (backAnim) {
+      println("backanim");
       image(imgBeforeQuiz, 0, 0, width, height);
     } else if (backAnimDone) {
       pages.animX = width;
@@ -109,17 +110,8 @@ void draw() {
     pages.goBack(imgQuiz);
   }
 
-  if (quizPage) {
-    println("quizPage");
-    if (backAnim) {
-      image(imgQuiz, 0, 0, width, height);
-    } else if(backAnimDone) {
-      pages.animX = width;
-      pages.animY = height;
-      backAnimDone = false;
-    } else {
-      pages.animMiddle(imgQuiz);
-    }
+  if (quizPage && !backAnim) {
+    pages.animMiddle(imgQuiz);
       noFill();
     rect(457*resScaleX, 525*resScaleY, 1130*resScaleX, 135*resScaleY);
     rect(457*resScaleX, 825*resScaleY, 1130*resScaleX, 135*resScaleY);
@@ -128,6 +120,7 @@ void draw() {
   
   if(quizWrong) {
     image(imgQuizWrong, 0, 0, width, height);
+    println("wrong");
   }
 
   if (beforeClassPage && !homeAnim) {
@@ -168,7 +161,7 @@ void mousePressed() {
   }
 
   if (pageObjView) {
-    buttons.page3D();
+    buttons.pageObjectViewer();
   }
 
   if (page3D) {

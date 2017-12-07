@@ -21,7 +21,7 @@ class ButtonPress {
     }
   }
   
-  void page3D() {
+  void pageObjectViewer() {
     if(mouseX > 629*resScaleX && mouseX < 1379*resScaleX &&
     mouseY > 640*resScaleY && mouseY < 892*resScaleY) {
       page3D = true;
@@ -55,7 +55,7 @@ class ButtonPress {
       mouseY > homeY && mouseY < homeY+homeSizeY) {
       modelPressed = false;
       if(quizWrong) {
-        backAnim = true;
+        quizPage = true;
         quizWrong = false;
       } else if (quizPage) {
         backAnim = true;

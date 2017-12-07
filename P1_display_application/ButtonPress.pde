@@ -54,7 +54,10 @@ class ButtonPress {
     if (mouseX > homeX && mouseX < homeX+homeSizeX &&
       mouseY > homeY && mouseY < homeY+homeSizeY) {
       modelPressed = false;
-      if (quizPage) {
+      if(quizWrong) {
+        backAnim = true;
+        quizWrong = false;
+      } else if (quizPage) {
         backAnim = true;
         beforeQuizPage = true;
         println("test");

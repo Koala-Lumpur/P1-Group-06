@@ -81,7 +81,7 @@ void draw() {
     pages.pageChange(imgObjView);
     //rect(629*resScaleX, 640*resScaleY, 750*resScaleX, 252*resScaleY);
   }
-  
+
   if (page3D) {
     page3DModel();
     //rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
@@ -92,13 +92,13 @@ void draw() {
   }
 
   if (beforeQuizPage && !homeAnim) {
-    if(backAnim) {
-      image(imgBeforeQuiz,0,0,width,height);
-    } else if(backAnimDone){
+    println("beforeQuiz");
+    if (backAnim) {
+      image(imgBeforeQuiz, 0, 0, width, height);
+    } else if (backAnimDone) {
       pages.animX = width;
       pages.animY = height;
-    pages.pageChange(imgBeforeQuiz);
-    backAnimDone = false;
+      backAnimDone = false;
     } else {
       pages.pageChange(imgBeforeQuiz);
     }
@@ -109,27 +109,39 @@ void draw() {
     pages.goBack(imgQuiz);
   }
 
-  if (quizPage && !backAnim) {
-    pages.animMiddle(imgQuiz);
-    noFill();
-    rect(457*resScaleX, 525*resScaleY, 1130*resScaleX,135*resScaleY);
-    rect(457*resScaleX, 825*resScaleY, 1130*resScaleX,135*resScaleY);
-    rect(457*resScaleX, 1125*resScaleY, 1130*resScaleX,135*resScaleY);
+  if (quizPage) {
+    println("quizPage");
+    if (backAnim) {
+      image(imgQuiz, 0, 0, width, height);
+    } else if(backAnimDone) {
+      pages.animX = width;
+      pages.animY = height;
+      backAnimDone = false;
+    } else {
+      pages.animMiddle(imgQuiz);
+    }
+      noFill();
+    rect(457*resScaleX, 525*resScaleY, 1130*resScaleX, 135*resScaleY);
+    rect(457*resScaleX, 825*resScaleY, 1130*resScaleX, 135*resScaleY);
+    rect(457*resScaleX, 1125*resScaleY, 1130*resScaleX, 135*resScaleY);
   }
   
-  if(beforeClassPage && !homeAnim) {
+  if(quizWrong) {
+    image(imgQuizWrong, 0, 0, width, height);
+  }
+
+  if (beforeClassPage && !homeAnim) {
     pages.pageChange(imgBeforeClassroom);
   }
-  
-  if(beforeClassPage && homeAnim) {
+
+  if (beforeClassPage && homeAnim) {
     pages.goHome(imgBeforeClassroom);
   }
- // if(quizPageCorrect && homeAnim) {
+  // if(quizPageCorrect && homeAnim) {
   //  pages.goHomeMiddle(quizPageCorrect);
-//  }
-  
-  if(classPage)  {
-    
+  //  }
+
+  if (classPage) {
   }
 
   fill(0);
@@ -176,8 +188,8 @@ void mousePressed() {
   if (beforeQuizPage) {
     buttons.quizContinue();
   }
-  
-  if(quizPage) {
+
+  if (quizPage) {
     buttons.quizAnswer();
   }
 }

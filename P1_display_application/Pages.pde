@@ -66,6 +66,7 @@ class Pages {
       animX = 0;
       animY = 0;
       quizPage = false;
+      classPage = false;
       backAnim = false;
       backAnimDone = true;
     }

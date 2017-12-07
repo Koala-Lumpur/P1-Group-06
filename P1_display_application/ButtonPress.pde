@@ -52,6 +52,16 @@ class ButtonPress {
     }
   }
 
+  void classContinue() {
+    if (mouseX > 885*resScaleX && mouseX < 885*resScaleX+buttonSizeX && 
+      mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
+      classPage = true;
+      beforeClassPage = false;
+      pages.animX = 0;
+      pages.animY = 0;
+    }
+  }
+
   void homeButton() {
     if (mouseX > homeX && mouseX < homeX+homeSizeX &&
       mouseY > homeY && mouseY < homeY+homeSizeY) {
@@ -59,6 +69,9 @@ class ButtonPress {
       if (quizWrong) {
         frontPage = true;
         quizWrong = false;
+      } else if (classPage) {
+        backAnim = true;
+        beforeClassPage = true;
       } else if (quizPage) {
         backAnim = true;
         beforeQuizPage = true;

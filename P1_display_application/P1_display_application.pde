@@ -14,7 +14,7 @@ int buttonSizeX, buttonSizeY;
 int buttonY;
 int homeX, homeY, homeSizeX, homeSizeY;
 
-float rotX, rotY;
+float rotY;
 
 boolean frontPage;
 boolean pageObjView, page3D;
@@ -33,6 +33,8 @@ void setup() {
   background(0);
   orientation(LANDSCAPE);
   fullScreen(P3D);
+  
+  fill(0);
 
   resScaleX = float(width)/2048;
   resScaleY = float(height)/1536;
@@ -92,9 +94,7 @@ void draw() {
   }
 
   if (beforeQuizPage && !homeAnim) {
-    println("beforeQuiz");
     if (backAnim) {
-      println("backanim");
       image(imgBeforeQuiz, 0, 0, width, height);
     } else if (backAnimDone) {
       pages.animX = width;
@@ -112,10 +112,6 @@ void draw() {
 
   if (quizPage && !backAnim) {
     pages.animMiddle(imgQuiz);
-      noFill();
-    rect(457*resScaleX, 525*resScaleY, 1130*resScaleX, 135*resScaleY);
-    rect(457*resScaleX, 825*resScaleY, 1130*resScaleX, 135*resScaleY);
-    rect(457*resScaleX, 1125*resScaleY, 1130*resScaleX, 135*resScaleY);
   }
   
   if(quizWrong) {
@@ -133,30 +129,34 @@ void draw() {
   }
 
   if (beforeClassPage && !homeAnim) {
-    pages.pageChange(imgBeforeClassroom);
+    if (backAnim) {
+      image(imgBeforeClassroom, 0, 0, width, height);
+    } else if (backAnimDone) {
+      pages.animX = width;
+      pages.animY = height;
+      backAnimDone = false;
+    } else {
+      pages.pageChange(imgBeforeClassroom);
+    }
   }
 
   if (beforeClassPage && homeAnim) {
     pages.goHome(imgBeforeClassroom);
   }
-
-
-  if (classPage) {
+  
+  if(classPage && backAnim) {
+    pages.goBack(imgClassroom);
   }
-
-  fill(0);
-  textSize(30);
-  text(int(frameRate), 2000*resScaleX, 50*resScaleY);
-
-  //rect(homeX, homeY, homeSizeX,homeSizeY);
+  
+  if (classPage && !backAnim) {
+    pages.animMiddle(imgClassroom);
+  }
 }
 
 void mouseDragged() {
   if (temple.isVisible()) {
     float x1 = mouseX-pmouseX;
-    float y1 = mouseY-pmouseY;
-    rotX += -y1 * 0.002;
-    rotY += x1 * 0.002;
+    rotY += -x1 * 0.002;
   }
 }
 
@@ -192,6 +192,10 @@ void mousePressed() {
   if (quizPage) {
     buttons.quizAnswer();
   }
+  
+  if(beforeClassPage) {
+    buttons.classContinue();
+  }
 }
 
 void page3DModel() {
@@ -216,7 +220,6 @@ void translations() {
   scale(10);
   ambientLight(128, 128, 128);
   directionalLight(128, 128, 128, 0, 0, -1);
-  //rotateX(rotX);
   rotateY(rotY);
 }
 

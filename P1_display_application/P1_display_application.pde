@@ -139,9 +139,7 @@ void draw() {
   if (beforeClassPage && homeAnim) {
     pages.goHome(imgBeforeClassroom);
   }
-  // if(quizPageCorrect && homeAnim) {
-  //  pages.goHomeMiddle(quizPageCorrect);
-  //  }
+
 
   if (classPage) {
   }

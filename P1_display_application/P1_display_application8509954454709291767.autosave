@@ -1,12 +1,11 @@
 PShape temple;
 PImage imgFP, imgObjView; 
 PImage imgBeforeQuiz, imgQuiz;
-PImage imgBeforeClassroom, imgClassroom;
 PImage homeIcon, showObjectButton;
 PImage book;
-PImage quizPageCorrect;
+PImage BeforeClassroomPage3;
 
-color bgColor = color(107, 146, 155);
+color bgColor = color(107,146,155);
 
 float resScaleX, resScaleY;
 
@@ -19,8 +18,7 @@ float rotX, rotY;
 boolean frontPage;
 boolean pageObjView, page3D;
 boolean beforeQuizPage, quizPage;
-boolean beforeClassPage, classPage;
-boolean homeAnim, backAnim;
+boolean homeAnim;
 
 boolean modelPressed, modelNotPressed = true;
 
@@ -47,18 +45,15 @@ void setup() {
 
   frontPage = true;
 
-  //Load images and the 3D model
   imgFP = loadImage("FrontPage.jpg");
-  imgObjView = loadImage("ObjectViewer.jpg");
+  imgObjView = loadImage("ObjectViewer3.jpg");
   imgBeforeQuiz = loadImage("BeforeQuizPage.jpg");
   imgQuiz = loadImage("QuizPage.jpg");
-  imgBeforeClassroom = loadImage("BeforeClassroomPage3.jpg");
-  imgClassroom = loadImage("Classroom.jpg");
   homeIcon = loadImage("HouseIcon.png");
   showObjectButton = loadImage("VisObjekt.jpg");
   book = loadImage("FakeBook.jpg");
   temple = loadShape("Temple.obj");
-  quizPageCorrect = loadImage("QuizPageCorrect.jpg");
+  BeforeClassroomPage3 = loadImage("BeforeClassroomPage3;.jpg");
 }
 
 void draw() {
@@ -80,45 +75,40 @@ void draw() {
     //rect(629*resScaleX, 640*resScaleY, 750*resScaleX, 252*resScaleY);
   }
   
-  if (page3D) {
-    page3DModel();
-    //rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
-  }
-
-  if (beforeQuizPage && homeAnim) {
+  if(beforeQuizPage && homeAnim) {
     pages.goHome(imgBeforeQuiz);
   }
-
-  if (beforeQuizPage && !homeAnim) {
-    if(backAnim) {
-      image(imgBeforeQuiz,0,0,width,height);
-    } else {
+  
+  if(beforeQuizPage && !homeAnim) {
     pages.pageChange(imgBeforeQuiz);
-    }
-    //rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
+    noFill();
+    rect(195*resScaleX, 570*resScaleY, 432*resScaleX,280*resScaleY);
   }
-
-  if (quizPage && backAnim) {
-    pages.goBack(imgQuiz);
+  
+  if(quizPage && homeAnim) {
+    pages.goHomeMiddle(imgQuiz);
   }
-
-  if (quizPage && !backAnim) {
+  
+  if(quizPage && !homeAnim) {
     pages.animMiddle(imgQuiz);
   }
-  
-  if(beforeClassPage && !homeAnim) {
-    pages.pageChange(imgBeforeClassroom);
-  }
-  
-  if(beforeClassPage && homeAnim) {
-    pages.goHome(imgBeforeClassroom);
-  }
- // if(quizPageCorrect && homeAnim) {
-  //  pages.goHomeMiddle(quizPageCorrect);
-//  }
-  
-  if(classPage)  {
-    
+
+  if (page3D) {
+    background(0);
+    image(book, 0, 0, width, height);
+    text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
+    lights();
+    pushMatrix();
+    translations();
+    rotateX(radians(180));
+    shape(temple);
+    popMatrix();
+    image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 105*resScaleY);
+    image(showObjectButton, 1440*resScaleX, 100*resScaleY,500*resScaleX, 245*resScaleY);
+    if(!modelPressed) {
+      rotY += radians(1);
+    }
+    //rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
   }
 
   fill(0);
@@ -137,22 +127,31 @@ void mouseDragged() {
   }
 }
 
+void translations() {
+  translate(1300*resScaleX, 900*resScaleY, 300);
+  scale(10);
+  ambientLight(128, 128, 128);
+  directionalLight(128, 128, 128, 0, 0, -1);
+  //rotateX(rotX);
+  rotateY(rotY);
+}
+
 void mousePressed() {
   if (frontPage) {
     buttons.frontPage();
   } else {
     buttons.homeButton();
   }
-
-  if (pageObjView) {
+  
+  if(pageObjView) {
     buttons.page3D();
   }
 
   if (page3D) {
-    if (!modelNotPressed) {
+    if(!modelNotPressed) {
       modelPressed = true;
     }
-    if (modelNotPressed) {
+    if(modelNotPressed) {
       modelPressed = false;
       modelNotPressed = false;
     }
@@ -161,36 +160,10 @@ void mousePressed() {
       showModel();
     }
   }
-
-  if (beforeQuizPage) {
+  
+  if(beforeQuizPage) {
     buttons.quizContinue();
   }
-}
-
-void page3DModel() {
-  background(0);
-  image(book, 0, 0, width, height);
-  text(int(frameRate), 2000*resScaleX, 50*resScaleY); 
-  lights();
-  pushMatrix();
-  translations();
-  rotateX(radians(180));
-  shape(temple);
-  popMatrix();
-  image(homeIcon, homeX*resScaleX, homeY+10*resScaleY, 105*resScaleX, 105*resScaleY);
-  image(showObjectButton, 1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
-  if (!modelPressed) {
-    rotY += radians(1);
-  }
-}
-
-void translations() {
-  translate(1300*resScaleX, 900*resScaleY, 300);
-  scale(10);
-  ambientLight(128, 128, 128);
-  directionalLight(128, 128, 128, 0, 0, -1);
-  //rotateX(rotX);
-  rotateY(rotY);
 }
 
 void showModel() {

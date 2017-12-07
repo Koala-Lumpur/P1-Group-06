@@ -4,7 +4,6 @@ PImage imgBeforeQuiz, imgQuiz;
 PImage imgBeforeClassroom, imgClassroom;
 PImage homeIcon, showObjectButton;
 PImage book;
-PImage quizPageCorrect;
 
 color bgColor = color(107, 146, 155);
 
@@ -20,7 +19,7 @@ boolean frontPage;
 boolean pageObjView, page3D;
 boolean beforeQuizPage, quizPage;
 boolean beforeClassPage, classPage;
-boolean homeAnim, backAnim;
+boolean homeAnim;
 
 boolean modelPressed, modelNotPressed = true;
 
@@ -47,9 +46,8 @@ void setup() {
 
   frontPage = true;
 
-  //Load images and the 3D model
   imgFP = loadImage("FrontPage.jpg");
-  imgObjView = loadImage("ObjectViewer.jpg");
+  imgObjView = loadImage("ObjectViewer3.jpg");
   imgBeforeQuiz = loadImage("BeforeQuizPage.jpg");
   imgQuiz = loadImage("QuizPage.jpg");
   imgBeforeClassroom = loadImage("BeforeClassroomPage3.jpg");
@@ -58,7 +56,6 @@ void setup() {
   showObjectButton = loadImage("VisObjekt.jpg");
   book = loadImage("FakeBook.jpg");
   temple = loadShape("Temple.obj");
-  quizPageCorrect = loadImage("QuizPageCorrect.jpg");
 }
 
 void draw() {
@@ -90,19 +87,16 @@ void draw() {
   }
 
   if (beforeQuizPage && !homeAnim) {
-    if(backAnim) {
-      image(imgBeforeQuiz,0,0,width,height);
-    } else {
     pages.pageChange(imgBeforeQuiz);
-    }
-    //rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
+    noFill();
+    rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
   }
 
-  if (quizPage && backAnim) {
-    pages.goBack(imgQuiz);
+  if (quizPage && homeAnim) {
+    pages.goHomeMiddle(imgQuiz);
   }
 
-  if (quizPage && !backAnim) {
+  if (quizPage && !homeAnim) {
     pages.animMiddle(imgQuiz);
   }
   
@@ -113,15 +107,12 @@ void draw() {
   if(beforeClassPage && homeAnim) {
     pages.goHome(imgBeforeClassroom);
   }
- // if(quizPageCorrect && homeAnim) {
-  //  pages.goHomeMiddle(quizPageCorrect);
-//  }
   
   if(classPage)  {
     
   }
 
-  fill(0);
+  fill(255);
   textSize(30);
   text(int(frameRate), 2000*resScaleX, 50*resScaleY);
 

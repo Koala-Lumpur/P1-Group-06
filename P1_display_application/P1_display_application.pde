@@ -48,7 +48,7 @@ void setup() {
   frontPage = true;
 
   imgFP = loadImage("FrontPage.jpg");
-  imgObjView = loadImage("ObjectViewer3.jpg");
+  imgObjView = loadImage("ObjectViewer.jpg");
   imgBeforeQuiz = loadImage("BeforeQuizPage.jpg");
   imgQuiz = loadImage("QuizPage.jpg");
   imgBeforeClassroom = loadImage("BeforeClassroomPage3.jpg");
@@ -109,9 +109,9 @@ void draw() {
   if(beforeClassPage && homeAnim) {
     pages.goHome(imgBeforeClassroom);
   }
-  if(quizPageCorrect && homeAnim) {
-    pages.goHomeMiddle(quizPageCorrect);
-  }
+ // if(quizPageCorrect && homeAnim) {
+  //  pages.goHomeMiddle(quizPageCorrect);
+//  }
   
   if(classPage)  {
     

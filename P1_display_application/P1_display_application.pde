@@ -20,7 +20,7 @@ boolean frontPage;
 boolean pageObjView, page3D;
 boolean beforeQuizPage, quizPage;
 boolean beforeClassPage, classPage;
-boolean homeAnim, backAnim;
+boolean homeAnim, backAnim, backAnimDone;
 
 boolean modelPressed, modelNotPressed = true;
 
@@ -92,8 +92,13 @@ void draw() {
   if (beforeQuizPage && !homeAnim) {
     if(backAnim) {
       image(imgBeforeQuiz,0,0,width,height);
-    } else {
+    } else if(backAnimDone){
+      pages.animX = width;
+      pages.animY = height;
     pages.pageChange(imgBeforeQuiz);
+    backAnimDone = false;
+    } else {
+      pages.pageChange(imgBeforeQuiz);
     }
     //rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
   }
@@ -104,6 +109,10 @@ void draw() {
 
   if (quizPage && !backAnim) {
     pages.animMiddle(imgQuiz);
+    noFill();
+    rect(457*resScaleX, 525*resScaleY, 1130*resScaleX,135*resScaleY);
+    rect(457*resScaleX, 825*resScaleY, 1130*resScaleX,135*resScaleY);
+    rect(457*resScaleX, 1125*resScaleY, 1130*resScaleX,135*resScaleY);
   }
   
   if(beforeClassPage && !homeAnim) {

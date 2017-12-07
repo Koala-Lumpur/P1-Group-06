@@ -68,6 +68,7 @@ class Pages {
       println("done");
       quizPage = false;
       backAnim = false;
+      backAnimDone = true;
     }
   }
 }

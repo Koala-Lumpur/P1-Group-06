@@ -4,7 +4,6 @@ PImage imgBeforeQuiz, imgQuiz;
 PImage imgBeforeClassroom, imgClassroom;
 PImage homeIcon, showObjectButton;
 PImage book;
-PImage quizPageCorrect;
 
 color bgColor = color(107, 146, 155);
 
@@ -57,7 +56,6 @@ void setup() {
   showObjectButton = loadImage("VisObjekt.jpg");
   book = loadImage("FakeBook.jpg");
   temple = loadShape("Temple.obj");
-  quizPageCorrect = loadImage("QuizPageCorrect.jpg");
 }
 
 void draw() {
@@ -109,15 +107,12 @@ void draw() {
   if(beforeClassPage && homeAnim) {
     pages.goHome(imgBeforeClassroom);
   }
-  if(quizPageCorrect && homeAnim) {
-    pages.goHomeMiddle(quizPageCorrect);
-  }
   
   if(classPage)  {
     
   }
 
-  fill(0);
+  fill(255);
   textSize(30);
   text(int(frameRate), 2000*resScaleX, 50*resScaleY);
 

@@ -21,7 +21,7 @@ boolean frontPage;
 boolean pageObjView, page3D;
 boolean beforeQuizPage, quizPage;
 boolean beforeClassPage, classPage;
-boolean homeAnim, backAnim;
+boolean homeAnim;
 
 boolean modelPressed, modelNotPressed = true;
 
@@ -48,7 +48,6 @@ void setup() {
 
   frontPage = true;
 
-  //Load images and the 3D model
   imgFP = loadImage("FrontPage.jpg");
   imgObjView = loadImage("ObjectViewer.jpg");
   imgBeforeQuiz = loadImage("BeforeQuizPage.jpg");
@@ -60,7 +59,7 @@ void setup() {
   book = loadImage("FakeBook.jpg");
   temple = loadShape("Temple.obj");
   quizPageCorrect = loadImage("QuizPageCorrect.jpg");
-  QuizPageWrong = loadImage("QuizPageWrong");
+  QuizPageWrong = loadImage("QuizPageWrong.jpg");
 }
 
 void draw() {
@@ -92,19 +91,16 @@ void draw() {
   }
 
   if (beforeQuizPage && !homeAnim) {
-    if(backAnim) {
-      image(imgBeforeQuiz,0,0,width,height);
-    } else {
     pages.pageChange(imgBeforeQuiz);
-    }
-    //rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
+    noFill();
+    rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
   }
 
-  if (quizPage && backAnim) {
-    pages.goBack(imgQuiz);
+  if (quizPage && homeAnim) {
+    pages.goHomeMiddle(imgQuiz);
   }
 
-  if (quizPage && !backAnim) {
+  if (quizPage && !homeAnim) {
     pages.animMiddle(imgQuiz);
   }
   

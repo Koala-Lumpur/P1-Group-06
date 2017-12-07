@@ -7,17 +7,12 @@ class ButtonPress {
     if (mouseX > 407*resScaleX && mouseX < 407*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
       pageObjView = true;
-      println("touched");
     } else if (mouseX > 885*resScaleX && mouseX < 885*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
-      println("touched 2");
       beforeQuizPage = true;
     } else if (mouseX > 1440*resScaleX && mouseX < 1440*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {
-      println("touched 3");
       beforeClassPage = true;
-    } else {
-      println("nope");
     }
   }
 
@@ -46,7 +41,6 @@ class ButtonPress {
       mouseY > 525*resScaleY && mouseY < 660*resScaleY) {
       quizWrong = true;
       quizPage = false;
-      println("depressed");
     } else if (mouseX > 457*resScaleX && mouseX < 1578* resScaleX &&
       mouseY > 825*resScaleY && mouseY < 960*resScaleY) {
       quizCorrect = true;
@@ -55,7 +49,6 @@ class ButtonPress {
       mouseY > 1125*resScaleY && mouseY < 1260*resScaleY) {
       quizWrong = true;
       quizPage = false;
-      println("fuck, Rasmus is depressed");
     }
   }
 
@@ -64,17 +57,12 @@ class ButtonPress {
       mouseY > homeY && mouseY < homeY+homeSizeY) {
       modelPressed = false;
       if (quizWrong) {
-        quizPage = true;
-        quizWrong = false;
-      } else if (quizCorrect) {
         frontPage = true;
-        quizCorrect = false;
+        quizWrong = false;
       } else if (quizPage) {
         backAnim = true;
         beforeQuizPage = true;
-        println("test");
       } else if (!page3D) {
-        println("test2");
         homeAnim = true;
         frontPage = true;
       } else {

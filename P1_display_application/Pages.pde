@@ -53,6 +53,7 @@ class Pages {
       beforeQuizPage = false;
       pageObjView = false;
       beforeClassPage = false;
+      quizCorrect = false;
       homeAnim = false;
     }
   }

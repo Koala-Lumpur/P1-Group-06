@@ -123,9 +123,13 @@ void draw() {
     println("wrong");
   }
   
-   if(quizCorrect) {
+   if(quizCorrect && !homeAnim) {
     image(imgQuizCorrect, 0, 0, width, height);
     println("correct");
+  }
+  
+  if(quizCorrect && homeAnim) {
+    pages.goHome(imgQuizCorrect);
   }
 
   if (beforeClassPage && !homeAnim) {

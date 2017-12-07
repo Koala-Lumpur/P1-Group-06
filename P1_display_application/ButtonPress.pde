@@ -46,8 +46,9 @@ class ButtonPress {
       mouseY > homeY && mouseY < homeY+homeSizeY) {
       modelPressed = false;
       if (quizPage) {
-        homeAnim = true;
+        backAnim = true;
         beforeQuizPage = true;
+        println("test");
       } else if(!page3D) {
         println("test2");
         homeAnim = true;

@@ -27,7 +27,8 @@ class Pages {
   }
 
   void animMiddle(PImage img) {
-    image(img, width/2-animX/2, height/2-animY/2, animX, animY);
+    println(animX);
+    image(img, (width-animX)/2, (height-animY)/2, animX, animY);
     animX += animSpeedX*resScaleX;
     animY += animSpeedY*resScaleY;
     if (animX > width-(animSpeedX*resScaleX)) {
@@ -45,17 +46,11 @@ class Pages {
 
   void goHome(PImage img) {
     image(img, 0, height-animY, animX, animY);
-    if (animX > 0) {
       animX -= animSpeedX*resScaleX;
-    } else {
-      animX = 0;
-    }
-    if (animY > 0) {
       animY -=animSpeedY*resScaleY;
-    } else {
+    if (animX <= 0 && animY <= 0) {
+      animX = 0;
       animY = 0;
-    }
-    if (animX == 0 && animY == 0) {
       beforeQuizPage = false;
       pageObjView = false;
       beforeClassPage = false;
@@ -63,21 +58,16 @@ class Pages {
     }
   }
   
-  void goHomeMiddle(PImage img) {
-    image(img, width/2-animX/2, height/2-animY/2, animX, animY);
-    if (animX > 0) {
+  void goBack(PImage img) {
+    image(img, (width-animX)/2, (height-animY)/2, animX, animY);//width/2-animX/2, height/2-animY/2, animX, animY);
       animX -= animSpeedX*resScaleX;
-    } else {
+      animY -= animSpeedY*resScaleY;
+    if (animX <= 0 && animY <= 0) {
       animX = 0;
-    }
-    if (animY > 0) {
-      animY -=animSpeedY*resScaleY;
-    } else {
       animY = 0;
-    }
-    if (animX == 0 && animY == 0) {
+      println("done");
       quizPage = false;
-      homeAnim = false;
+      backAnim = false;
     }
   }
 }

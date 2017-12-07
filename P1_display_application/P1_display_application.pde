@@ -19,7 +19,7 @@ boolean frontPage;
 boolean pageObjView, page3D;
 boolean beforeQuizPage, quizPage;
 boolean beforeClassPage, classPage;
-boolean homeAnim;
+boolean homeAnim, backAnim;
 
 boolean modelPressed, modelNotPressed = true;
 
@@ -46,6 +46,7 @@ void setup() {
 
   frontPage = true;
 
+  //Load images and the 3D model
   imgFP = loadImage("FrontPage.jpg");
   imgObjView = loadImage("ObjectViewer3.jpg");
   imgBeforeQuiz = loadImage("BeforeQuizPage.jpg");
@@ -87,16 +88,19 @@ void draw() {
   }
 
   if (beforeQuizPage && !homeAnim) {
+    if(backAnim) {
+      image(imgBeforeQuiz,0,0,width,height);
+    } else {
     pages.pageChange(imgBeforeQuiz);
-    noFill();
-    rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
+    }
+    //rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
   }
 
-  if (quizPage && homeAnim) {
-    pages.goHomeMiddle(imgQuiz);
+  if (quizPage && backAnim) {
+    pages.goBack(imgQuiz);
   }
 
-  if (quizPage && !homeAnim) {
+  if (quizPage && !backAnim) {
     pages.animMiddle(imgQuiz);
   }
   

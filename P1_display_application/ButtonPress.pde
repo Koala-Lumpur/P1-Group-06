@@ -41,6 +41,15 @@ class ButtonPress {
     }
   }
   
+  void quizAnswer() {
+    if(mouseX > 457*resScaleX && mouseX < 1587*resScaleX &&
+    mouseY > 525*resScaleY && mouseY < 660*resScaleY) {
+      quizWrong = true;
+      quizPage = false;
+      println("pressed");
+    }
+  }
+  
   void homeButton() {
     if (mouseX > homeX && mouseX < homeX+homeSizeX &&
       mouseY > homeY && mouseY < homeY+homeSizeY) {

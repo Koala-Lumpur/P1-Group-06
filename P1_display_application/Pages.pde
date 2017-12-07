@@ -27,7 +27,6 @@ class Pages {
   }
 
   void animMiddle(PImage img) {
-    println(animX);
     image(img, (width-animX)/2, (height-animY)/2, animX, animY);
     animX += animSpeedX*resScaleX;
     animY += animSpeedY*resScaleY;
@@ -65,7 +64,6 @@ class Pages {
     if (animX <= 0 && animY <= 0) {
       animX = 0;
       animY = 0;
-      println("done");
       quizPage = false;
       backAnim = false;
       backAnimDone = true;

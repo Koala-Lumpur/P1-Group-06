@@ -1,11 +1,10 @@
 PShape temple;
 PImage imgFP, imgObjView; 
 PImage imgBeforeQuiz, imgQuiz;
+PImage imgQuizCorrect, imgQuizWrong;
 PImage imgBeforeClassroom, imgClassroom;
 PImage homeIcon, showObjectButton;
 PImage book;
-PImage quizPageCorrect;
-PImage QuizPageWrong;
 
 color bgColor = color(107, 146, 155);
 
@@ -20,6 +19,7 @@ float rotX, rotY;
 boolean frontPage;
 boolean pageObjView, page3D;
 boolean beforeQuizPage, quizPage;
+boolean quizWrong, quizCorrect;
 boolean beforeClassPage, classPage;
 boolean homeAnim, backAnim, backAnimDone;
 
@@ -53,14 +53,14 @@ void setup() {
   imgObjView = loadImage("ObjectViewer.jpg");
   imgBeforeQuiz = loadImage("BeforeQuizPage.jpg");
   imgQuiz = loadImage("QuizPage.jpg");
+  imgQuizCorrect = loadImage("QuizPageCorrect.jpg");
+  imgQuizWrong = loadImage("QuizPageWrong.jpg");
   imgBeforeClassroom = loadImage("BeforeClassroomPage3.jpg");
   imgClassroom = loadImage("Classroom.jpg");
   homeIcon = loadImage("HouseIcon.png");
   showObjectButton = loadImage("VisObjekt.jpg");
   book = loadImage("FakeBook.jpg");
   temple = loadShape("Temple.obj");
-  quizPageCorrect = loadImage("QuizPageCorrect.jpg");
-  QuizPageWrong = loadImage("QuizPageWrong");
 }
 
 void draw() {
@@ -175,6 +175,10 @@ void mousePressed() {
 
   if (beforeQuizPage) {
     buttons.quizContinue();
+  }
+  
+  if(quizPage) {
+    buttons.quizAnswer();
   }
 }
 

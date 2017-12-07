@@ -17,3 +17,4 @@ So..it looks like the 3D model just won't work on a tablet properly. We get arou
 Right now we will still try a few methods to fix this, but according to our research, Processing Android just can't handle 3D models.
 We might just have to run the whole project on computers after all....'
 I cant believe this. We resolved the3 problem. It was the motherfucking UV mappings in Maya. We are so happy right now. 
+

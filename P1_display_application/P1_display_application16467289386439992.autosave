@@ -1,10 +1,10 @@
 PShape temple;
 PImage imgFP, imgObjView; 
 PImage imgBeforeQuiz, imgQuiz;
-PImage imgQuizCorrect, imgQuizWrong;
 PImage imgBeforeClassroom, imgClassroom;
 PImage homeIcon, showObjectButton;
 PImage book;
+PImage quizPageCorrect;
 
 color bgColor = color(107, 146, 155);
 
@@ -19,9 +19,8 @@ float rotX, rotY;
 boolean frontPage;
 boolean pageObjView, page3D;
 boolean beforeQuizPage, quizPage;
-boolean quizWrong, quizCorrect;
 boolean beforeClassPage, classPage;
-boolean homeAnim, backAnim, backAnimDone;
+boolean homeAnim;
 
 boolean modelPressed, modelNotPressed = true;
 
@@ -48,19 +47,17 @@ void setup() {
 
   frontPage = true;
 
-  //Load images and the 3D model
   imgFP = loadImage("FrontPage.jpg");
   imgObjView = loadImage("ObjectViewer.jpg");
   imgBeforeQuiz = loadImage("BeforeQuizPage.jpg");
   imgQuiz = loadImage("QuizPage.jpg");
-  imgQuizCorrect = loadImage("QuizPageCorrect.jpg");
-  imgQuizWrong = loadImage("QuizPageWrong.jpg");
   imgBeforeClassroom = loadImage("BeforeClassroomPage3.jpg");
   imgClassroom = loadImage("Classroom.jpg");
   homeIcon = loadImage("HouseIcon.png");
   showObjectButton = loadImage("VisObjekt.jpg");
   book = loadImage("FakeBook.jpg");
   temple = loadShape("Temple.obj");
+  quizPageCorrect = loadImage("QuizPageCorrect.jpg");
 }
 
 void draw() {
@@ -70,69 +67,55 @@ void draw() {
   //rect(1440*resScaleX, 200*resScaleY, 289*resScaleX, 245*resScaleY);
 
   if (frontPage) {
+    background(255);
     pages.frontPage();
   }
 
   if (pageObjView && homeAnim) {
+    background(107, 146, 155);
     pages.goHome(imgObjView);
   }
 
   if (pageObjView && !homeAnim) {
+    background(107, 146, 155);
     pages.pageChange(imgObjView);
     //rect(629*resScaleX, 640*resScaleY, 750*resScaleX, 252*resScaleY);
   }
 
   if (page3D) {
+    background(107, 146, 155);
     page3DModel();
     //rect(1440*resScaleX, 100*resScaleY, 500*resScaleX, 245*resScaleY);
   }
 
   if (beforeQuizPage && homeAnim) {
+    background(107, 146, 155);
     pages.goHome(imgBeforeQuiz);
   }
 
   if (beforeQuizPage && !homeAnim) {
-    println("beforeQuiz");
-    if (backAnim) {
-      println("backanim");
-      image(imgBeforeQuiz, 0, 0, width, height);
-    } else if (backAnimDone) {
-      pages.animX = width;
-      pages.animY = height;
-      backAnimDone = false;
-    } else {
-      pages.pageChange(imgBeforeQuiz);
-    }
-    //rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
+    pages.pageChange(imgBeforeQuiz);
+    noFill();
+    rect(195*resScaleX, 570*resScaleY, 432*resScaleX, 280*resScaleY);
   }
 
-  if (quizPage && backAnim) {
-    pages.goBack(imgQuiz);
+  if (quizPage && homeAnim) {
+    background(107, 146, 155);
+    pages.goHomeMiddle(imgQuiz);
   }
 
-  if (quizPage && !backAnim) {
+  if (quizPage && !homeAnim) {
+    background(107, 146, 155);
     pages.animMiddle(imgQuiz);
-      noFill();
-    rect(457*resScaleX, 525*resScaleY, 1130*resScaleX, 135*resScaleY);
-    rect(457*resScaleX, 825*resScaleY, 1130*resScaleX, 135*resScaleY);
-    rect(457*resScaleX, 1125*resScaleY, 1130*resScaleX, 135*resScaleY);
-  }
-  
-  if(quizWrong) {
-    image(imgQuizWrong, 0, 0, width, height);
-    println("wrong");
-  }
-  
-   if(quizCorrect) {
-    image(imgQuizCorrect, 0, 0, width, height);
-    println("correct");
   }
 
   if (beforeClassPage && !homeAnim) {
+    background(107, 146, 155);
     pages.pageChange(imgBeforeClassroom);
   }
 
   if (beforeClassPage && homeAnim) {
+    background(107, 146, 155);
     pages.goHome(imgBeforeClassroom);
   }
   // if(quizPageCorrect && homeAnim) {
@@ -166,7 +149,7 @@ void mousePressed() {
   }
 
   if (pageObjView) {
-    buttons.pageObjectViewer();
+    buttons.page3D();
   }
 
   if (page3D) {
@@ -185,10 +168,6 @@ void mousePressed() {
 
   if (beforeQuizPage) {
     buttons.quizContinue();
-  }
-
-  if (quizPage) {
-    buttons.quizAnswer();
   }
 }
 

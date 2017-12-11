@@ -3,6 +3,7 @@ class ButtonPress {
   ButtonPress() {
   }
 
+  //location buttons on pages and changing page booleans according to that
   void frontPage() {
     if (mouseX > 407*resScaleX && mouseX < 407*resScaleX+buttonSizeX && 
       mouseY > buttonY && mouseY < buttonY+buttonSizeY) {

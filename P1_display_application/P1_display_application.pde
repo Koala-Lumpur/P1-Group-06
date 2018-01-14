@@ -36,7 +36,7 @@ void setup() {
   frameRate(60);
   background(0);
   orientation(LANDSCAPE);
-  fullScreen(P3D);
+  fullScreen(P3D); //need to use a non-default renderer, as we are working with a 3D model
   
   fill(0);
 
